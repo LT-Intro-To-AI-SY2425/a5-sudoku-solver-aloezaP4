@@ -125,7 +125,9 @@ class Board:
         Returns:
             True if we've placed all numbers, False otherwise
         """
-        pass
+        if self.num_nums_placed == 81:
+            return True
+        return False
 
     def update(self, row: int, column: int, assignment: int) -> None:
         """Assigns the given value to the cell given by passed in row and column
@@ -175,6 +177,10 @@ def BFS(state: Board) -> Board:
 if __name__ == "__main__":
     # uncomment the below lines once you've implemented the board class
    
+    b = Board()
+    print(b)
+    b.print_pretty
+    
     # # CODE BELOW HERE RUNS YOUR BFS/DFS
     # print("<<<<<<<<<<<<<< Solving Sudoku >>>>>>>>>>>>>>")
 
