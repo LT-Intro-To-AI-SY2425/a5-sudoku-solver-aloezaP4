@@ -106,7 +106,7 @@ class Board:
         Returns:
             a tuple of row, column index identifying the most constrained cell
         """
-        shortestListLength = 9
+        shortestListLength = 10
         mostConstrainedXPos = 0
         mostConstrainedYPos = 0
         for row in self.rows:
