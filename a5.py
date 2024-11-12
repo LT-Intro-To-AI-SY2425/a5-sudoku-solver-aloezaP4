@@ -113,8 +113,8 @@ class Board:
             for col in range(9):
                 if(len(self.rows[row][col])<shortestListLength):
                     shortestListLength=len(self.rows[row][col])
-                    mostConstrainedXPos=row
-                    mostConstrainedYPos=col
+                    mostConstrainedXPos=col
+                    mostConstrainedYPos=row
         return (mostConstrainedXPos,mostConstrainedYPos)
 
     def failure_test(self) -> bool:
