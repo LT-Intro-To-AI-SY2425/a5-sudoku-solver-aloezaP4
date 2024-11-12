@@ -141,7 +141,15 @@ class Board:
             column - index of the column to assign
             assignment - value to place at given row, column coordinate
         """
-        pass
+        self.rows[row][column] = assignment
+
+        for i in range(self.size):
+            remove_if_exists(self.rows[row][i], assignment)
+            remove_if_exists(self.rows[i][column], assignment)
+        
+        print(self.subgrid_coordinates(row,column))
+        for i, j in self.subgrid_coordinates(row,column):
+            remove_if_exists(self.rows[i][j], assignment)
 
 
 def DFS(state: Board) -> Board:
@@ -177,9 +185,13 @@ def BFS(state: Board) -> Board:
 if __name__ == "__main__":
     # uncomment the below lines once you've implemented the board class
    
-    b = Board()
-    print(b)
-    b.print_pretty
+    # b = Board()
+    # print(b)
+    # b.print_pretty
+    # b.update(3,5,4)
+    # b.update(0,3,7)
+    # b.update(5,6,1)
+    # b.update()
     
     # # CODE BELOW HERE RUNS YOUR BFS/DFS
     # print("<<<<<<<<<<<<<< Solving Sudoku >>>>>>>>>>>>>>")
