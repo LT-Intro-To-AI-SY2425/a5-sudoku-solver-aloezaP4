@@ -106,12 +106,13 @@ class Board:
         Returns:
             a tuple of row, column index identifying the most constrained cell
         """
-        shortestListLength = 10
+        shortestListLength = 9
         mostConstrainedXPos = 0
         mostConstrainedYPos = 0
-        for row in self.rows:
+        for row in range(9):
             for col in range(9):
-                if(len(self.rows[row][col])<shortestListLength):
+                length = len(self.rows[row])
+                if( length < shortestListLength):
                     shortestListLength=len(self.rows[row][col])
                     mostConstrainedXPos=col
                     mostConstrainedYPos=row
@@ -279,32 +280,32 @@ if __name__ == "__main__":
     #     (8, 5, 7),
     #     (8, 7, 5),
     # ]
-    # #Create a sudoku board.
-    # b = Board()
-    # #Place the 28 assignments in first_moves on the board.
-    # for trip in first_moves:
-    #     b.rows[trip[0]][trip[1]] = trip[2]
-    # #NOTE - the above code only *puts* the numbers on the board, but doesn't
-    # #   do the work that update does (remove numbers from other lists, etc).
+    #Create a sudoku board.
+    b = Board()
+    #Place the 28 assignments in first_moves on the board.
+    for trip in first_moves:
+        b.rows[trip[0]][trip[1]] = trip[2]
+    #NOTE - the above code only *puts* the numbers on the board, but doesn't
+    #   do the work that update does (remove numbers from other lists, etc).
 
-    # #I'm going to now alter 3 lists on the board to make them shorter (more
-    # #   constrained. 
-    # remove_if_exists(b.rows[0][0], 8)
-    # remove_if_exists(b.rows[0][0], 7)
-    # remove_if_exists(b.rows[0][0], 3)
-    # remove_if_exists(b.rows[0][0], 2)
-    # remove_if_exists(b.rows[4][8], 8)
-    # remove_if_exists(b.rows[4][8], 1)
-    # remove_if_exists(b.rows[4][8], 2)
-    # remove_if_exists(b.rows[4][8], 3)
-    # remove_if_exists(b.rows[4][8], 4)
-    # remove_if_exists(b.rows[6][7], 2)
-    # remove_if_exists(b.rows[6][7], 3)
-    # remove_if_exists(b.rows[6][7], 5)
-    # remove_if_exists(b.rows[6][7], 6)
-    # #we removed 5 items from positions (4,8) so that should now be the most
-    # #  constrained.
-    # assert b.find_most_constrained_cell() == (4,8), "find most constrained cell test 1"
+    #I'm going to now alter 3 lists on the board to make them shorter (more
+    #   constrained. 
+    remove_if_exists(b.rows[0][0], 8)
+    remove_if_exists(b.rows[0][0], 7)
+    remove_if_exists(b.rows[0][0], 3)
+    remove_if_exists(b.rows[0][0], 2)
+    remove_if_exists(b.rows[4][8], 8)
+    remove_if_exists(b.rows[4][8], 1)
+    remove_if_exists(b.rows[4][8], 2)
+    remove_if_exists(b.rows[4][8], 3)
+    remove_if_exists(b.rows[4][8], 4)
+    remove_if_exists(b.rows[6][7], 2)
+    remove_if_exists(b.rows[6][7], 3)
+    remove_if_exists(b.rows[6][7], 5)
+    remove_if_exists(b.rows[6][7], 6)
+    #we removed 5 items from positions (4,8) so that should now be the most
+    #  constrained.
+    assert b.find_most_constrained_cell() == (4,8), "find most constrained cell test 1"
     # assert b.failure_test() == False, "failure test test 1"
     # assert b.goal_test() == False, "goal test test 1"
 
