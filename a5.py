@@ -106,17 +106,29 @@ class Board:
         Returns:
             a tuple of row, column index identifying the most constrained cell
         """
-        shortestListLength = 9
-        mostConstrainedXPos = 0
-        mostConstrainedYPos = 0
-        for row in range(9):
-            for col in range(9):
-                length = len(self.rows[row])
-                if( length < shortestListLength):
-                    shortestListLength=len(self.rows[row][col])
-                    mostConstrainedXPos=col
-                    mostConstrainedYPos=row
-        return (mostConstrainedXPos,mostConstrainedYPos)
+        # shortestListLength = 9
+        # mostConstrainedXPos = 0
+        # mostConstrainedYPos = 0
+        # for i,r in enumerate(self.rows):
+        #     for j,col in enumerate(r):
+
+        #         if isinstance(col,list) and len(col) < shortestListLength:
+        #             shortestListLength=col
+        #             mostConstrainedXPos=i
+        #             mostConstrainedYPos=j
+        # return (mostConstrainedXPos,mostConstrainedYPos)
+        mini = 9
+        row = 0
+        column = 0
+        for i in range(self.size):
+            for j in range(self.size):
+                cell = self.rows[i][j]
+                if isinstance(cell, list) and len(cell) < mini:
+                    mini = len(cell)
+                    row = i
+                    column = j
+                    # print(row, column, mini)
+        return (row, column)
 
     def failure_test(self) -> bool:
         """Check if we've failed to correctly fill out the puzzle. If we find a cell
@@ -193,31 +205,24 @@ def BFS(state: Board) -> Board:
 if __name__ == "__main__":
     # uncomment the below lines once you've implemented the board class
    
-    # b = Board()
-    # print(b)
-    # b.print_pretty
-    # b.update(3,5,4)
-    # b.update(0,3,7)
-    # b.update(5,6,1)
-    # b.update()
     
-    # # CODE BELOW HERE RUNS YOUR BFS/DFS
-    # print("<<<<<<<<<<<<<< Solving Sudoku >>>>>>>>>>>>>>")
+    # CODE BELOW HERE RUNS YOUR BFS/DFS
+    print("<<<<<<<<<<<<<< Solving Sudoku >>>>>>>>>>>>>>")
 
-    # def test_dfs_or_bfs(use_dfs: bool, moves: List[Tuple[int, int, int]]) -> None:
-    #     b = Board()
-    #     # make initial moves to set up board
-    #     for move in moves:
-    #         b.update(*move)
+    def test_dfs_or_bfs(use_dfs: bool, moves: List[Tuple[int, int, int]]) -> None:
+        b = Board()
+        # make initial moves to set up board
+        for move in moves:
+            b.update(*move)
 
-    #     # print initial board
-    #     print("<<<<< Initial Board >>>>>")
-    #     b.print_pretty()
-    #     # solve board
-    #     solution = (DFS if use_dfs else BFS)(b)
-    #     # print solved board
-    #     print("<<<<< Solved Board >>>>>")
-    #     solution.print_pretty()
+        # print initial board
+        print("<<<<< Initial Board >>>>>")
+        b.print_pretty()
+        # solve board
+        solution = (DFS if use_dfs else BFS)(b)
+        # print solved board
+        print("<<<<< Solved Board >>>>>")
+        solution.print_pretty()
 
     # sets of moves for the different games
     first_moves = [
@@ -251,35 +256,35 @@ if __name__ == "__main__":
         (8, 7, 8),
     ]
 
-    # second_moves = [
-    #     (0, 1, 2),
-    #     (0, 3, 3),
-    #     (0, 5, 5),
-    #     (0, 7, 4),
-    #     (1, 6, 9),
-    #     (2, 1, 7),
-    #     (2, 4, 4),
-    #     (2, 7, 8),
-    #     (3, 0, 1),
-    #     (3, 2, 7),
-    #     (3, 5, 9),
-    #     (3, 8, 2),
-    #     (4, 1, 9),
-    #     (4, 4, 3),
-    #     (4, 7, 6),
-    #     (5, 0, 6),
-    #     (5, 3, 7),
-    #     (5, 6, 5),
-    #     (5, 8, 8),
-    #     (6, 1, 1),
-    #     (6, 4, 9),
-    #     (6, 7, 2),
-    #     (7, 2, 6),
-    #     (8, 1, 4),
-    #     (8, 3, 8),
-    #     (8, 5, 7),
-    #     (8, 7, 5),
-    # ]
+    second_moves = [
+        (0, 1, 2),
+        (0, 3, 3),
+        (0, 5, 5),
+        (0, 7, 4),
+        (1, 6, 9),
+        (2, 1, 7),
+        (2, 4, 4),
+        (2, 7, 8),
+        (3, 0, 1),
+        (3, 2, 7),
+        (3, 5, 9),
+        (3, 8, 2),
+        (4, 1, 9),
+        (4, 4, 3),
+        (4, 7, 6),
+        (5, 0, 6),
+        (5, 3, 7),
+        (5, 6, 5),
+        (5, 8, 8),
+        (6, 1, 1),
+        (6, 4, 9),
+        (6, 7, 2),
+        (7, 2, 6),
+        (8, 1, 4),
+        (8, 3, 8),
+        (8, 5, 7),
+        (8, 7, 5),
+    ]
     #Create a sudoku board.
     b = Board()
     #Place the 28 assignments in first_moves on the board.
@@ -306,6 +311,7 @@ if __name__ == "__main__":
     #we removed 5 items from positions (4,8) so that should now be the most
     #  constrained.
     assert b.find_most_constrained_cell() == (4,8), "find most constrained cell test 1"
+    print(b.find_most_constrained_cell())
     # assert b.failure_test() == False, "failure test test 1"
     # assert b.goal_test() == False, "goal test test 1"
 
@@ -315,12 +321,12 @@ if __name__ == "__main__":
     # print("All part 1 tests passed!")
 
     # ##Now, let's write some quick tests to check update!
-    #Create a sudoku board.
-    g = Board()
-    #Place the 28 assignments in first_moves on the board.
-    for trip in first_moves:
-        g.update(trip[0],trip[1],trip[2])
-    g.print_pretty()
+    # #Create a sudoku board.
+    # g = Board()
+    # #Place the 28 assignments in first_moves on the board.
+    # for trip in first_moves:
+    #     g.update(trip[0],trip[1],trip[2])
+    # g.print_pretty()
     # #From the above print statement, you can see which numbers
     # #  have been assigned to the board, and then create test
     # #  cases by looking at the board and listing what values are
