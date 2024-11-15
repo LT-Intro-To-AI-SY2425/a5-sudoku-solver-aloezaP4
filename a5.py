@@ -167,9 +167,9 @@ class Board:
             remove_if_exists(self.rows[row][i], assignment)
             remove_if_exists(self.rows[i][column], assignment)
         
-        print(self.subgrid_coordinates(row,column))
         for i, j in self.subgrid_coordinates(row,column):
             remove_if_exists(self.rows[i][j], assignment)
+        self.num_nums_placed+=1
 
 
 def DFS(state: Board) -> Board:
@@ -321,12 +321,12 @@ if __name__ == "__main__":
     # print("All part 1 tests passed!")
 
     # ##Now, let's write some quick tests to check update!
-    # #Create a sudoku board.
-    # g = Board()
-    # #Place the 28 assignments in first_moves on the board.
-    # for trip in first_moves:
-    #     g.update(trip[0],trip[1],trip[2])
-    # g.print_pretty()
+    #Create a sudoku board.
+    g = Board()
+    #Place the 28 assignments in first_moves on the board.
+    for trip in first_moves:
+        g.update(trip[0],trip[1],trip[2])
+    g.print_pretty()
     # #From the above print statement, you can see which numbers
     # #  have been assigned to the board, and then create test
     # #  cases by looking at the board and listing what values are
