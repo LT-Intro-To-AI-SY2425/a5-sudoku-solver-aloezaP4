@@ -333,22 +333,22 @@ if __name__ == "__main__":
     for trip in first_moves:
         g.update(trip[0],trip[1],trip[2])
     g.print_pretty()
-    # #From the above print statement, you can see which numbers
-    # #  have been assigned to the board, and then create test
-    # #  cases by looking at the board and listing what values are
-    # #  still possible for a specific cell. I have created
-    # #  2 such test cases like that for you. 
-    # assert g.rows[0][2] == [2,5,6], "update test 1"
-    # assert g.rows[5][5] == [3,7,9], "update test 2"
-    # assert g.num_nums_placed == 28, "update test 3"
-    # assert g.find_most_constrained_cell() == (1,7), "fmc test"
-    # assert g.failure_test() == False, "failure test test"
-    # assert g.goal_test() == False, "goal test test"
-    # g.num_nums_placed = 81
-    # assert g.goal_test() == True, "goal test test"
-    # print("All part 2 tests passed! Testing DFS and BFS next:")
+    #From the above print statement, you can see which numbers
+    #  have been assigned to the board, and then create test
+    #  cases by looking at the board and listing what values are
+    #  still possible for a specific cell. I have created
+    #  2 such test cases like that for you. 
+    assert g.rows[0][2] == [2,5,6], "update test 1"
+    assert g.rows[5][5] == [3,7,9], "update test 2"
+    assert g.num_nums_placed == 28, "update test 3"
+    assert g.find_most_constrained_cell() == (1,7), "fmc test"
+    assert g.failure_test() == False, "failure test test"
+    assert g.goal_test() == False, "goal test test"
+    g.num_nums_placed = 81
+    assert g.goal_test() == True, "goal test test"
+    print("All part 2 tests passed! Testing DFS and BFS next:")
 
-    # print("<<<<<<<<<<<<<< Testing DFS on First Game >>>>>>>>>>>>>>")
+    # print("<<<<<<<<<<<<<< Testing DFS on First Game >>>>clea>>>>>>>>>>")
 
     # test_dfs_or_bfs(True, first_moves)
 
