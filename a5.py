@@ -201,9 +201,7 @@ def DFS(state: Board) -> Board:
             return b
         mcc = b.find_most_constrained_cell()
         row, col = mcc
-        print(row, col)
         for val in b.rows[row][col]:
-            print(val)
             cpy = copy.deepcopy(b)
             cpy.update(row, col, val)
             s.push(cpy)
@@ -226,7 +224,19 @@ def BFS(state: Board) -> Board:
     Returns:
         either None in the case of invalid input or a solved board
     """
-    pass
+    q = Queue([state])
+    while not q.is_empty():
+        b : Board = q.pop()
+        if b.goal_test():
+            return b
+        mcc = b.find_most_constrained_cell()
+        r = mcc[0]
+        c = mcc[1]
+        for choice in b.rows[r][c]:
+            cpy = copy.deepcopy(b)
+            cpy.update(r,c,choice)
+            q.push(cpy)
+    return None
 
 
 if __name__ == "__main__":
@@ -371,15 +381,15 @@ if __name__ == "__main__":
 
     test_dfs_or_bfs(True, first_moves)
 
-    # print("<<<<<<<<<<<<<< Testing DFS on Second Game >>>>>>>>>>>>>>")
+    print("<<<<<<<<<<<<<< Testing DFS on Second Game >>>>>>>>>>>>>>")
 
-    # test_dfs_or_bfs(True, second_moves)
+    test_dfs_or_bfs(True, second_moves)
 
-    # print("<<<<<<<<<<<<<< Testing BFS on First Game >>>>>>>>>>>>>>")
+    print("<<<<<<<<<<<<<< Testing BFS on First Game >>>>>>>>>>>>>>")
 
-    # test_dfs_or_bfs(False, first_moves)
+    test_dfs_or_bfs(False, first_moves)
 
-    # print("<<<<<<<<<<<<<< Testing BFS on Second Game >>>>>>>>>>>>>>")
+    print("<<<<<<<<<<<<<< Testing BFS on Second Game >>>>>>>>>>>>>>")
 
-    # test_dfs_or_bfs(False, second_moves)
+    test_dfs_or_bfs(False, second_moves)
     pass
